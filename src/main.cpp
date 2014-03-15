@@ -32,7 +32,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0xffc7312b4ba9409b84a966d8666ee12c81dc2c3076d5e3a1e8f34892592b6e2e");
+uint256 hashGenesisBlock("0xb280d6d2829e50aeb6862ced2c8c3de3f7360e0ee2e1521b2293b10ceba5693d");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20);
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -2973,7 +2973,7 @@ bool InitBlockIndex() {
         printf("%s\n", hash.ToString().c_str());
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        //assert(block.hashMerkleRoot == uint256("0xb280d6d2829e50aeb6862ced2c8c3de3f7360e0ee2e1521b2293b10ceba5693d"));
+        assert(block.hashMerkleRoot == uint256("0xe599411480a8f501c481a4bcdf8cce1f0bf69e160a8a480cfa74879acc149af2"));
 	    // If genesis block hash does not match, then generate new genesis hash.
         if (false && block.GetHash() != hashGenesisBlock)
         {
@@ -3017,8 +3017,8 @@ bool InitBlockIndex() {
             printf("block.nNonce = %u \n", block.nNonce);
             printf("block.GetHash = %s\n", block.GetHash().ToString().c_str());
         }
-        //block.print();
-        //assert(hash == hashGenesisBlock);
+        block.print();
+        assert(hash == hashGenesisBlock);
 
         // Start new block file
         try {
