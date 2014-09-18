@@ -5,9 +5,9 @@ SetCompressor /SOLID lzma
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.8.6.2
+!define VERSION 1.3.1.2
 !define COMPANY "Rubycoin project"
-!define URL http://www.rubycoin.org/
+!define URL http://www.rubycoin.com/
 
 # MUI Symbol Definitions
 !define MUI_ICON "../share/pixmaps/bitcoin.ico"
@@ -45,13 +45,13 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile rubycoin-0.8.6.2-win32-setup.exe
+OutFile rubycoin-1.3.1.2-win32-setup.exe
 InstallDir $PROGRAMFILES\Rubycoin
 CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
-VIProductVersion 0.8.6.2
+VIProductVersion 1.3.1.2
 VIAddVersionKey ProductName Rubycoin
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"

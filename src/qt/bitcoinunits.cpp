@@ -1,3 +1,7 @@
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include "bitcoinunits.h"
 
 #include <QStringList>
@@ -34,9 +38,9 @@ QString BitcoinUnits::name(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("RUBY");
-    case mBTC: return QString("mRUBY");
-    case uBTC: return QString::fromUtf8("μRUBY");
+    case BTC: return QString("RBY");
+    case mBTC: return QString("mRBY");
+    case uBTC: return QString::fromUtf8("μRBY");
     default: return QString("???");
     }
 }
@@ -67,9 +71,9 @@ int BitcoinUnits::amountDigits(int unit)
 {
     switch(unit)
     {
-    case BTC: return 8;
-    case mBTC: return 11;
-    case uBTC: return 14;
+    case BTC: return 8; // 21,000,000 (# digits, without commas)
+    case mBTC: return 11; // 21,000,000,000
+    case uBTC: return 14; // 21,000,000,000,000
     default: return 0;
     }
 }
@@ -98,6 +102,14 @@ QString BitcoinUnits::format(int unit, qint64 n, bool fPlus)
     qint64 remainder = n_abs % coin;
     QString quotient_str = QString::number(quotient);
     QString remainder_str = QString::number(remainder).rightJustified(num_decimals, '0');
+
+    // Adds spaces every three characters of quotient_str
+    // Example: 123456 is now 123 456
+    for(int i = quotient_str.count(); i > 3;i-=3)
+    {
+        if (i > 3)
+            quotient_str.insert(i-3,' ');
+    }    
 
     // Right-trim excess zeros after the decimal point
     int nTrim = 0;

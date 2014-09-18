@@ -17,14 +17,14 @@
 	<key>CFBundleExecutable</key>
 	<string>Rubycoin-Qt</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.rubycoin.Rubycoin-Qt</string>
+	<string>com.rubycoin.Rubycoin-Qt</string>
         <key>CFBundleURLTypes</key>
         <array>
           <dict>
             <key>CFBundleTypeRole</key>
             <string>Editor</string>
             <key>CFBundleURLName</key>
-            <string>org.rubycoin.RubycoinPayment</string>
+            <string>com.rubycoin.RubycoinPayment</string>
             <key>CFBundleURLSchemes</key>
             <array>
               <string>rubycoin</string>

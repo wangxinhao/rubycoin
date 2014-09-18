@@ -244,7 +244,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+1"/>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR RUBYCOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR REDDCOINS&lt;/b&gt;!</source>
         <translation>هشدار: اگر wallet رمزگذاری شود و شما passphrase را گم کنید شما همه اطلاعات rubycoin را از دست خواهید داد.</translation>
     </message>
     <message>
@@ -652,7 +652,7 @@ Address: %4
         <location line="-23"/>
         <location line="+23"/>
         <source>URI can not be parsed! This can be caused by an invalid Rubycoin address or malformed URI parameters.</source>
-        <translation>URI قابل تحلیل نیست. این خطا ممکن است به دلیل ادرس RUBYCOIN اشتباه یا پارامترهای اشتباه URI رخ داده باشد</translation>
+        <translation>URI قابل تحلیل نیست. این خطا ممکن است به دلیل ادرس REDDCOIN اشتباه یا پارامترهای اشتباه URI رخ داده باشد</translation>
     </message>
     <message>
         <location line="+17"/>
@@ -850,7 +850,7 @@ Address: %4
     <message>
         <location line="+7"/>
         <source>Connect to the Rubycoin network through a SOCKS proxy (e.g. when connecting through Tor).</source>
-        <translation>اتصال به شبکه RUBYCOIN از طریق پراکسی ساکس (برای مثال وقتی از طریق نرم افزار TOR متصل می شوید)</translation>
+        <translation>اتصال به شبکه REDDCOIN از طریق پراکسی ساکس (برای مثال وقتی از طریق نرم افزار TOR متصل می شوید)</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -925,7 +925,7 @@ Address: %4
     <message>
         <location line="+13"/>
         <source>The user interface language can be set here. This setting will take effect after restarting Rubycoin.</source>
-        <translation>زبان میانجی کاربر می تواند در اینجا تنظیم شود. این تنظیمات بعد از شروع دوباره RESTART در RUBYCOIN اجرایی خواهند بود.</translation>
+        <translation>زبان میانجی کاربر می تواند در اینجا تنظیم شود. این تنظیمات بعد از شروع دوباره RESTART در REDDCOIN اجرایی خواهند بود.</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -1402,7 +1402,7 @@ Address: %4
     </message>
     <message>
         <location line="+34"/>
-        <source>The address to send the payment to (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
+        <source>The address to send the payment to (starts with R)</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1443,8 +1443,8 @@ Address: %4
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a Rubycoin address (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
-        <translation>آدرس بیتکویین وارد کنید  (bijvoorbeeld: Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
+        <source>Enter a Rubycoin address (starts with R)</source>
+        <translation>آدرس بیتکویین وارد کنید  (starts with R)</translation>
     </message>
 </context>
 <context>
@@ -1466,8 +1466,8 @@ Address: %4
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to sign the message with (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
-        <translation>آدرس برای امضا کردن پیام با (برای مثال Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
+        <source>The address to sign the message with (starts with R)</source>
+        <translation>آدرس برای امضا کردن پیام با (starts with R)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1509,7 +1509,7 @@ Address: %4
     <message>
         <location line="+21"/>
         <source>Sign the message to prove you own this Rubycoin address</source>
-        <translation>پیام را برای اثبات آدرس RUBYCOIN خود امضا کنید</translation>
+        <translation>پیام را برای اثبات آدرس REDDCOIN خود امضا کنید</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1539,13 +1539,13 @@ Address: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>The address the message was signed with (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
-        <translation>آدرس برای امضا کردن پیام با (برای مثال Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
+        <source>The address the message was signed with (starts with R)</source>
+        <translation>آدرس برای امضا کردن پیام با (starts with R)</translation>
     </message>
     <message>
         <location line="+40"/>
         <source>Verify the message to ensure it was signed with the specified Rubycoin address</source>
-        <translation>پیام را برای اطمنان از ورود به سیستم با آدرس RUBYCOIN مشخص خود،تایید کنید</translation>
+        <translation>پیام را برای اطمنان از ورود به سیستم با آدرس REDDCOIN مشخص خود،تایید کنید</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1560,8 +1560,8 @@ Address: %4
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a Rubycoin address (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
-        <translation>آدرس بیتکویین وارد کنید  (bijvoorbeeld: Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
+        <source>Enter a Rubycoin address (starts with R)</source>
+        <translation>آدرس بیتکویین وارد کنید  (starts with R)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -2235,8 +2235,8 @@ Address: %4
     </message>
     <message>
         <location line="-28"/>
-        <source>Listen for connections on &lt;port&gt; (default: 9333 or testnet: 19333)</source>
-        <translation>برای اتصالات به &lt;port&gt; (پیش‌فرض: 9333 یا تست‌نت: 19333) گوش کنید</translation>
+        <source>Listen for connections on &lt;port&gt; (default: 45444 or testnet: 145444)</source>
+        <translation>برای اتصالات به &lt;port&gt; (پیش‌فرض: 45444 یا تست‌نت: 145444) گوش کنید</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -2270,8 +2270,8 @@ Address: %4
     </message>
     <message>
         <location line="+27"/>
-        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 9332 or testnet: 19332)</source>
-        <translation>( 9332پیش فرض :) &amp;lt;poort&amp;gt; JSON-RPC شنوایی برای ارتباطات</translation>
+        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 45443 or testnet: 145443)</source>
+        <translation>( 45443پیش فرض :) &amp;lt;poort&amp;gt; JSON-RPC شنوایی برای ارتباطات</translation>
     </message>
     <message>
         <location line="+37"/>

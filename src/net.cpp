@@ -1,9 +1,10 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2012 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "db.h"
+#include "miner.h"
 #include "net.h"
 #include "init.h"
 #include "addrman.h"
@@ -27,7 +28,7 @@
 using namespace std;
 using namespace boost;
 
-static const int MAX_OUTBOUND_CONNECTIONS = 16;
+static const int MAX_OUTBOUND_CONNECTIONS = 8;
 
 bool OpenNetworkConnection(const CAddress& addrConnect, CSemaphoreGrant *grantOutbound = NULL, const char *strDest = NULL, bool fOneShot = false);
 
@@ -402,7 +403,7 @@ bool GetMyExternalIP(CNetAddr& ipRet)
 void ThreadGetMyExternalIP(void* parg)
 {
     // Make this thread recognisable as the external IP detection thread
-    RenameThread("bitcoin-ext-ip");
+    RenameThread("rubycoin-ext-ip");
 
     CNetAddr addrLocalHost;
     if (GetMyExternalIP(addrLocalHost))
@@ -471,9 +472,12 @@ CNode* ConnectNode(CAddress addrConnect, const char *pszDest)
 
 
     /// debug print
-    printf("trying connection %s lastseen=%.1fhrs\n",
-        pszDest ? pszDest : addrConnect.ToString().c_str(),
-        pszDest ? 0 : (double)(GetAdjustedTime() - addrConnect.nTime)/3600.0);
+    if (fDebug)
+    {
+        printf("trying connection %s lastseen=%.1fhrs\n",
+            pszDest ? pszDest : addrConnect.ToString().c_str(),
+            pszDest ? 0 : (double)(GetAdjustedTime() - addrConnect.nTime)/3600.0);
+    }
 
     // Connect
     SOCKET hSocket;
@@ -1244,9 +1248,7 @@ void ThreadDNSAddressSeed()
 
 unsigned int pnSeed[] =
 {
-    0x52D0AF42, 0xDA286132, 0xDA90E2BC, 0x516D1BC6, 0xA28453D4,
-    0x228A25C1, 0xFA145B4A, 0x161C8B25, 0x0F3FE743, 0xCA11AA6B,
-    0x72BD09B0, 0x4AB50848, 0x125414C6, 0x6D131FAC, 0xD56228BC
+    0x9319EF17, 0x41D6A445, 0xDA286132
 };
 
 void DumpAddresses()
@@ -1805,7 +1807,7 @@ void StartNode(boost::thread_group& threadGroup)
 bool StopNode()
 {
     printf("StopNode()\n");
-    GenerateBitcoins(false, NULL);
+    GenerateRubycoins(false, NULL);
     MapPort(false);
     nTransactionsUpdated++;
     if (semOutbound)
