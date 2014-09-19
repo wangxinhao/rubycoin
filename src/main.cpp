@@ -3256,7 +3256,7 @@ FILE* OpenDiskFile(const CDiskBlockPos &pos, const char *prefix, bool fReadOnly)
 {
     if (pos.IsNull())
         return NULL;
-    boost::filesystem::path path = GetDataDir() / "blocks" / strprintf("%s%05u.dat", prefix, pos.nFile);
+    boost::filesystem::path path = GetDataDir() / "blocks_v1" / strprintf("%s%05u.dat", prefix, pos.nFile);
     boost::filesystem::create_directories(path.parent_path());
     FILE* file = fopen(path.string().c_str(), "rb+");
     if (!file && !fReadOnly)

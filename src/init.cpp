@@ -860,7 +860,7 @@ bool AppInit2(boost::thread_group& threadGroup)
     fReindex = GetBoolArg("-reindex");
 
     // Upgrading to 0.8; hard-link the old blknnnn.dat files into /blocks/
-    filesystem::path blocksDir = GetDataDir() / "blocks";
+    filesystem::path blocksDir = GetDataDir() / "blocks_v1";
     if (!filesystem::exists(blocksDir))
     {
         filesystem::create_directories(blocksDir);
