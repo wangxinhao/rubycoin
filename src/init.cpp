@@ -702,7 +702,7 @@ bool AppInit2(boost::thread_group& threadGroup)
         if (!bitdb.Open(GetDataDir()))
         {
             // try moving the database env out of the way
-            boost::filesystem::path pathDatabase = GetDataDir() / "database";
+            boost::filesystem::path pathDatabase = GetDataDir() / "database_v1";
             boost::filesystem::path pathDatabaseBak = GetDataDir() / strprintf("database.%"PRI64d".bak", GetTime());
             try {
                 boost::filesystem::rename(pathDatabase, pathDatabaseBak);
