@@ -19,7 +19,9 @@ using namespace std;
 map<uint256, CAlert> mapAlerts;
 CCriticalSection cs_mapAlerts;
 
-static const char* pszMainKey = "04d6a5b5b8a8e2cbe8f2019f5baa99dbdd40cdbf2a990e7543e576e2e33e04182c53f3ddd984ff8239a90525d487ebe437ca7a1796c6a710fd11512f76bda29ebe";
+static const char* pszMainKey = "04785294a66716642b8e44ee6ff23bc4addd609c0f6b1f061e288e22b59508e4a0724ec56a26a5e59f504661639320429e691064063a3ee13db891a6ee4f8f32e0";
+
+// TestNet alerts pubKey
 static const char* pszTestKey = "";
 
 void CUnsignedAlert::SetNull()
@@ -51,8 +53,8 @@ std::string CUnsignedAlert::ToString() const
     return strprintf(
         "CAlert(\n"
         "    nVersion     = %d\n"
-        "    nRelayUntil  = %"PRI64d"\n"
-        "    nExpiration  = %"PRI64d"\n"
+        "    nRelayUntil  = %"PRId64"\n"
+        "    nExpiration  = %"PRId64"\n"
         "    nID          = %d\n"
         "    nCancel      = %d\n"
         "    setCancel    = %s\n"
@@ -144,7 +146,9 @@ bool CAlert::RelayTo(CNode* pnode) const
 
 bool CAlert::CheckSignature() const
 {
-    CPubKey key(ParseHex(fTestNet ? pszTestKey : pszMainKey));
+    CKey key;
+    if (!key.SetPubKey(ParseHex(fTestNet ? pszTestKey : pszMainKey)))
+        return error("CAlert::CheckSignature() : SetPubKey failed");
     if (!key.Verify(Hash(vchMsg.begin(), vchMsg.end()), vchSig))
         return error("CAlert::CheckSignature() : verify signature failed");
 
@@ -241,7 +245,15 @@ bool CAlert::ProcessAlert(bool fThread)
                 // be safe we first strip anything not in safeChars, then add single quotes around
                 // the whole string before passing it to the shell:
                 std::string singleQuote("'");
-                std::string safeStatus = SanitizeString(strStatusBar);
+                // safeChars chosen to allow simple messages/URLs/email addresses, but avoid anything
+                // even possibly remotely dangerous like & or >
+                std::string safeChars("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890 .,;_/:?@");
+                std::string safeStatus;
+                for (std::string::size_type i = 0; i < strStatusBar.size(); i++)
+                {
+                    if (safeChars.find(strStatusBar[i]) != std::string::npos)
+                        safeStatus.push_back(strStatusBar[i]);
+                }
                 safeStatus = singleQuote+safeStatus+singleQuote;
                 boost::replace_all(strCmd, "%s", safeStatus);
 

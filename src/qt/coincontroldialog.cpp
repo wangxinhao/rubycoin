@@ -418,7 +418,6 @@ void CoinControlDialog::updateLabels(WalletModel *model, QDialog* dialog)
     qint64 nPayAmount = 0;
     bool fLowOutput = false;
     bool fDust = false;
-    unsigned int nQuantityDust = 0;
     CTransaction txDummy;
     foreach(const qint64 &amount, CoinControlDialog::payAmounts)
     {
@@ -426,15 +425,11 @@ void CoinControlDialog::updateLabels(WalletModel *model, QDialog* dialog)
 
         if (amount > 0)
         {
-            if (amount < CENT) {
+            if (amount < CENT)
                 fLowOutput = true;
-                nQuantityDust++;
-            }
 
             CTxOut txout(amount, (CScript)vector<unsigned char>(24, 0));
             txDummy.vout.push_back(txout);
-            if (txout.IsDust())
-               fDust = true; 
         }
     }
 
@@ -456,15 +451,6 @@ void CoinControlDialog::updateLabels(WalletModel *model, QDialog* dialog)
 
     BOOST_FOREACH(const COutput& out, vOutputs)
     {
-        // unselect already spent, very unlikely scenario, this could happen when selected are spent elsewhere, like rpc or another computer
-        if (out.tx->IsSpent(out.i))
-        {
-            uint256 txhash = out.tx->GetHash();
-            COutPoint outpt(txhash, out.i);
-            coinControl->UnSelect(outpt);
-            continue;
-        }
-
         // Quantity
         nQuantity++;
             
@@ -502,9 +488,7 @@ void CoinControlDialog::updateLabels(WalletModel *model, QDialog* dialog)
         int64_t nFee = nTransactionFee * (1 + (int64_t)nBytes / 1000);
         
         // Min Fee
-        int64_t nMinFee = CTransaction::nMinTxFee * (1 + (int64)nBytes / 1000) + CTransaction::nMinTxFee * nQuantityDust;
-        if (CTransaction::AllowFree(dPriority) && nBytes < 5000)
-            nMinFee = 0;
+        int64_t nMinFee = txDummy.GetMinFee(1, GMF_SEND, nBytes);
         
         nPayFee = max(nFee, nMinFee);
         
@@ -512,37 +496,19 @@ void CoinControlDialog::updateLabels(WalletModel *model, QDialog* dialog)
         {
             nChange = nAmount - nPayFee - nPayAmount;
             
-            // require CTransaction::nMinTxFee if any output is less than 0.01
-            if (nPayFee < CTransaction::nMinTxFee && fLowOutput)
-            {
-                nChange = nChange + nPayFee - CTransaction::nMinTxFee;
-                nPayFee = CTransaction::nMinTxFee * nQuantityDust;
-            }
-            
             // if sub-cent change is required, the fee must be raised to at least CTransaction::nMinTxFee   
-            if (nPayFee < CTransaction::nMinTxFee && nChange > 0 && nChange < CENT)
+            if (nPayFee < CENT && nChange > 0 && nChange < CENT)
             {
-                if (nChange < CTransaction::nMinTxFee) // change < 0.0001 => simply move all change to fees
+                if (nChange < CENT) // change < 0.01 => simply move all change to fees
                 {
-                    nPayFee += nChange;
+                    nPayFee = nChange;
                     nChange = 0;
                 }
                 else
                 {
-                    nChange = nChange + nPayFee - CTransaction::nMinTxFee;
-                    nPayFee = CTransaction::nMinTxFee;
+                    nChange = nChange + nPayFee - CENT;
+                    nPayFee = CENT;
                 }  
-            }
-            
-            // Never create dust outputs; if we would, just add the dust to the fee.
-            if (nChange > 0 && nChange < CENT)
-            {
-                CTxOut txout(nChange, (CScript)vector<unsigned char>(24, 0));
-                if (txout.IsDust())
-                {
-                    nPayFee += nChange;
-                    nChange = 0;
-                }
             }
             
             if (nChange == 0)
@@ -707,6 +673,12 @@ void CoinControlDialog::updateView()
 
             // date
             itemOutput->setText(COLUMN_DATE, QDateTime::fromTime_t(out.tx->GetTxTime()).toUTC().toString("yy-MM-dd hh:mm"));
+            
+            // immature PoS reward
+            if (out.tx->IsCoinStake() && out.tx->GetBlocksToMaturity() > 0 && out.tx->GetDepthInMainChain() > 0) {
+              itemOutput->setBackground(COLUMN_CONFIRMATIONS, Qt::red);
+              itemOutput->setDisabled(true);
+            }
 
             // confirmations
             itemOutput->setText(COLUMN_CONFIRMATIONS, strPad(QString::number(out.nDepth), 8, " "));

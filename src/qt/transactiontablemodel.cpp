@@ -365,15 +365,15 @@ QVariant TransactionTableModel::txAddressDecoration(const TransactionRecord *wtx
     switch(wtx->type)
     {
     case TransactionRecord::Generated:
-        return QIcon(fUseBlackTheme ? ":/icons/black/tx_mined" : ":/icons/tx_mined");
+        return QIcon(":/icons/tx_mined");
     case TransactionRecord::RecvWithAddress:
     case TransactionRecord::RecvFromOther:
-        return QIcon(fUseBlackTheme ? ":/icons/black/tx_input" : ":/icons/tx_input");
+        return QIcon(":/icons/tx_input");
     case TransactionRecord::SendToAddress:
     case TransactionRecord::SendToOther:
-        return QIcon(fUseBlackTheme ? ":/icons/black/tx_output" : ":/icons/tx_output");
+        return QIcon(":/icons/tx_output");
     default:
-        return QIcon(fUseBlackTheme ? ":/icons/black/tx_inout" : ":/icons/tx_inout");
+        return QIcon(":/icons/tx_inout");
     }
     return QVariant();
 }

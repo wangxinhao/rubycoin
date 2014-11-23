@@ -37,7 +37,7 @@ SendCoinsDialog::SendCoinsDialog(QWidget *parent) :
 
 #if QT_VERSION >= 0x040700
     /* Do not move this to the XML file, Qt before 4.7 will choke on it */
-    ui->lineEditCoinControlChange->setPlaceholderText(tr("Enter a Rubycoin address (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)"));
+    ui->lineEditCoinControlChange->setPlaceholderText(tr("Enter a Rubycoin address (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)"));
 #endif
 
     addEntry();
@@ -346,9 +346,9 @@ bool SendCoinsDialog::handleURI(const QString &uri)
     return false;
 }
 
-/*
-void SendCoinsDialog::setBalance(qint64 balance, qint64 unconfirmedBalance, qint64 immatureBalance)
+void SendCoinsDialog::setBalance(qint64 balance, qint64 stake, qint64 unconfirmedBalance, qint64 immatureBalance)
 {
+    Q_UNUSED(stake);
     Q_UNUSED(unconfirmedBalance);
     Q_UNUSED(immatureBalance);
     if(!model || !model->getOptionsModel())
@@ -365,24 +365,6 @@ void SendCoinsDialog::updateDisplayUnit()
         // Update labelBalance with the current balance and the current unit
         ui->labelBalance->setText(BitcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), model->getBalance()));
     }
-}
-*/
-
-void SendCoinsDialog::setBalance(qint64 balance, qint64 stake, qint64 unconfirmedBalance, qint64 immatureBalance)
-{
-    Q_UNUSED(stake);
-    Q_UNUSED(unconfirmedBalance);
-    Q_UNUSED(immatureBalance);
-
-    if(model && model->getOptionsModel())
-    {
-        ui->labelBalance->setText(BitcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), balance));
-    }
-}
-
-void SendCoinsDialog::updateDisplayUnit()
-{
-    setBalance(model->getBalance(), 0, 0, 0);
 }
 
 // Coin Control: copy label "Quantity" to clipboard

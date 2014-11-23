@@ -3,11 +3,11 @@
 <plist version="0.9">
 <dict>
 	<key>CFBundleIconFile</key>
-	<string>rubycoin.icns</string>
+	<string>darkcoin.icns</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleGetInfoString</key>
-	<string>$VERSION, Copyright © 2009-$YEAR The Bitcoin developers</string>
+	<string>$VERSION, Copyright © 2014 The Rubycoin developers</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$VERSION</string>
 	<key>CFBundleVersion</key>
@@ -17,17 +17,17 @@
 	<key>CFBundleExecutable</key>
 	<string>Rubycoin-Qt</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.rubycoin.Rubycoin-Qt</string>
+	<string>org.rubycoin.Rubycoin-Qt</string>
         <key>CFBundleURLTypes</key>
         <array>
           <dict>
             <key>CFBundleTypeRole</key>
             <string>Editor</string>
             <key>CFBundleURLName</key>
-            <string>com.rubycoin.RubycoinPayment</string>
+            <string>org.rubycoin.RubycoinPayment</string>
             <key>CFBundleURLSchemes</key>
             <array>
-              <string>rubycoin</string>
+              <string>Rubycoin</string>
             </array>
           </dict>
         </array>

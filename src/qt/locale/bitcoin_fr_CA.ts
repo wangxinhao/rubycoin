@@ -1756,8 +1756,8 @@ Les montants inférieurs à  0.546 fois les frais minimum de relais apparaissent
     </message>
     <message>
         <location filename="../sendcoinsdialog.cpp" line="-173"/>
-        <source>Enter a Rubycoin address (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Entrer une adresse Rubycoin (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>Enter a Rubycoin address (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Entrer une adresse Rubycoin (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+15"/>
@@ -1900,8 +1900,8 @@ Les montants inférieurs à  0.546 fois les frais minimum de relais apparaissent
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to send the payment to  (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Adresse destinataire du paiement ( ex : R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>The address to send the payment to  (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Adresse destinataire du paiement ( ex : Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1930,8 +1930,8 @@ Les montants inférieurs à  0.546 fois les frais minimum de relais apparaissent
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a Rubycoin address (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Entrer une adresse Rubycoin (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>Enter a Rubycoin address (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Entrer une adresse Rubycoin (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
 </context>
 <context>
@@ -1954,8 +1954,8 @@ Les montants inférieurs à  0.546 fois les frais minimum de relais apparaissent
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to sign the message with (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Entrer une adresse Rubycoin (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>The address to sign the message with (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Entrer une adresse Rubycoin (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -2018,8 +2018,8 @@ Les montants inférieurs à  0.546 fois les frais minimum de relais apparaissent
     </message>
     <message>
         <location line="+21"/>
-        <source>The address the message was signed with (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>L&apos;adresse avec laquelle le message à été signé (ex: R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>The address the message was signed with (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>L&apos;adresse avec laquelle le message à été signé (ex: Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+40"/>
@@ -2034,8 +2034,8 @@ Les montants inférieurs à  0.546 fois les frais minimum de relais apparaissent
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a Rubycoin address (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Entrer une adresse Rubycoin (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>Enter a Rubycoin address (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Entrer une adresse Rubycoin (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -2249,7 +2249,7 @@ Les montants inférieurs à  0.546 fois les frais minimum de relais apparaissent
     </message>
     <message>
         <location line="+3"/>
-        <source>Generated coins must mature 510 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
+        <source>Generated coins must mature 50 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Les pièces de monnaie générées nécessitent une maturation de 510 blocks avant de pouvoir être utilisées. Lors de la génération d&apos;un blokc, celui-ci est diffusé sur le réseau afin d&apos;être ajouté à la chaîne de blocks. En cas d&apos;échec, son état passera en &quot;non accepté&quot; et celui-ci ne pourra pas être dépensé. Cela peut occasionnellement se produire, lorsqu&apos;un noeud différent génère un block à quelques secondes d&apos;intervalle du vôtre.</translation>
     </message>
     <message>

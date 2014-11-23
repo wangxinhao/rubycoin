@@ -16,7 +16,6 @@ class SendCoinsDialog;
 class SignVerifyMessageDialog;
 class Notificator;
 class RPCConsole;
-//class ChatWindow;
 
 QT_BEGIN_NAMESPACE
 class QLabel;
@@ -70,7 +69,6 @@ private:
     AddressBookPage *receiveCoinsPage;
     SendCoinsDialog *sendCoinsPage;
     SignVerifyMessageDialog *signVerifyMessageDialog;
-    //ChatWindow *chatWindow;
 
     QLabel *labelEncryptionIcon;
     QLabel *labelStakingIcon;
@@ -99,7 +97,6 @@ private:
     QAction *lockWalletAction;
     QAction *aboutQtAction;
     QAction *openRPCConsoleAction;
-    //QAction *chatAction;
 
     QSystemTrayIcon *trayIcon;
     Notificator *notificator;
@@ -107,9 +104,8 @@ private:
     RPCConsole *rpcConsole;
 
     QMovie *syncIconMovie;
-    
-    uint64_t nAverageWeight;
-    uint64_t nTotalWeight;
+
+    uint64_t nWeight;
 
     /** Create the main UI actions. */
     void createActions();
@@ -156,8 +152,6 @@ private slots:
     /** Switch to send coins page */
     void gotoSendCoinsPage();
 
-    //void gotoChatWindow();
-
     /** Show Sign/Verify Message dialog and switch to sign message tab */
     void gotoSignMessageTab(QString addr = "");
     /** Show Sign/Verify Message dialog and switch to verify message tab */
@@ -191,7 +185,7 @@ private slots:
     void showNormalIfMinimized(bool fToggleHidden = false);
     /** simply calls showNormalIfMinimized(true) for use in SLOT() macro */
     void toggleHidden();
-    
+
     void updateWeight();
     void updateStakingIcon();
 };

@@ -1756,8 +1756,8 @@ Acest lucru înseamnă că o taxă de cel puțin %2 este necesară</translation>
     </message>
     <message>
         <location filename="../sendcoinsdialog.cpp" line="-173"/>
-        <source>Enter a Rubycoin address (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Introduceți o adresă Rubycoin(ex:R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>Enter a Rubycoin address (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Introduceți o adresă Rubycoin(ex:Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+15"/>
@@ -1900,8 +1900,8 @@ Acest lucru înseamnă că o taxă de cel puțin %2 este necesară</translation>
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to send the payment to  (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Adresa catre care trimiteti plata(ex. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>The address to send the payment to  (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Adresa catre care trimiteti plata(ex. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1930,8 +1930,8 @@ Acest lucru înseamnă că o taxă de cel puțin %2 este necesară</translation>
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a Rubycoin address (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Introduceți o adresă Rubycoin(ex:R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>Enter a Rubycoin address (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Introduceți o adresă Rubycoin(ex:Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
 </context>
 <context>
@@ -1954,8 +1954,8 @@ Acest lucru înseamnă că o taxă de cel puțin %2 este necesară</translation>
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to sign the message with (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Adresa cu care semnati mesajul(ex. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>The address to sign the message with (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Adresa cu care semnati mesajul(ex. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -2018,8 +2018,8 @@ Acest lucru înseamnă că o taxă de cel puțin %2 este necesară</translation>
     </message>
     <message>
         <location line="+21"/>
-        <source>The address the message was signed with (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Adresa cu care a fost semnat mesajul(ex. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>The address the message was signed with (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Adresa cu care a fost semnat mesajul(ex. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+40"/>
@@ -2034,8 +2034,8 @@ Acest lucru înseamnă că o taxă de cel puțin %2 este necesară</translation>
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a Rubycoin address (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Introduceți o adresă Rubycoin(ex:R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>Enter a Rubycoin address (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Introduceți o adresă Rubycoin(ex:Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -2249,7 +2249,7 @@ Acest lucru înseamnă că o taxă de cel puțin %2 este necesară</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Generated coins must mature 510 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
+        <source>Generated coins must mature 50 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Monedele generate trebuie să se maturizeze 510 blocuri înainte de a fi cheltuite. Când ați generat acest bloc,  a fost trimis la rețea pentru a fi adăugat la lanțul de blocuri. În cazul în care nu reușește să intre în lanț, starea sa se ​​va schimba in &quot;nu a fost acceptat&quot;, și nu va putea fi cheltuit. Acest lucru se poate întâmpla din când în când, dacă un alt nod generează un bloc cu câteva secunde inaintea blocului tau.</translation>
     </message>
     <message>

@@ -137,6 +137,7 @@ private:
 
     // Cache some values to be able to detect changes
     qint64 cachedBalance;
+    qint64 cachedStake;
     qint64 cachedUnconfirmedBalance;
     qint64 cachedImmatureBalance;
     EncryptionStatus cachedEncryptionStatus;
@@ -161,7 +162,7 @@ public slots:
 
 signals:
     // Signal that balance in wallet changed
-    void balanceChanged(qint64 balance, qint64 unconfirmedBalance, qint64 immatureBalance);
+    void balanceChanged(qint64 balance, qint64 stake, qint64 unconfirmedBalance, qint64 immatureBalance);
 
     // Encryption status of wallet changed
     void encryptionStatusChanged(int status);

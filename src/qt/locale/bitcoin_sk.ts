@@ -1755,8 +1755,8 @@ To znamená, že je potrebný poplatok aspoň %2.</translation>
     </message>
     <message>
         <location filename="../sendcoinsdialog.cpp" line="-173"/>
-        <source>Enter a Rubycoin address (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Zadajte Rubycoin adresu (napr. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>Enter a Rubycoin address (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Zadajte Rubycoin adresu (napr. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+15"/>
@@ -1899,8 +1899,8 @@ To znamená, že je potrebný poplatok aspoň %2.</translation>
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to send the payment to  (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Adresa pre poslanie platby (napr. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>The address to send the payment to  (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Adresa pre poslanie platby (napr. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1929,8 +1929,8 @@ To znamená, že je potrebný poplatok aspoň %2.</translation>
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a Rubycoin address (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Zadajte Rubycoin adresu (napr. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>Enter a Rubycoin address (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Zadajte Rubycoin adresu (napr. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
 </context>
 <context>
@@ -1953,8 +1953,8 @@ To znamená, že je potrebný poplatok aspoň %2.</translation>
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to sign the message with (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Adresa na podpísanie správy (napr. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>The address to sign the message with (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Adresa na podpísanie správy (napr. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -2017,8 +2017,8 @@ To znamená, že je potrebný poplatok aspoň %2.</translation>
     </message>
     <message>
         <location line="+21"/>
-        <source>The address the message was signed with (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Adresa správy bola podpísaná (napr. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>The address the message was signed with (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Adresa správy bola podpísaná (napr. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+40"/>
@@ -2033,8 +2033,8 @@ To znamená, že je potrebný poplatok aspoň %2.</translation>
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a Rubycoin address (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Zadajte Rubycoin adresu (napr. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>Enter a Rubycoin address (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Zadajte Rubycoin adresu (napr. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -2248,7 +2248,7 @@ To znamená, že je potrebný poplatok aspoň %2.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Generated coins must mature 510 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
+        <source>Generated coins must mature 50 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Generované mince musia zrieť 510 blokov pred tým, než môžu byť použité. Keď sa vygeneroval tento blok, bol vysielaný do siete, kde má byť pridaný do reťazca blokov. Ak sa nepodarí dostať ho do reťazca blokov, jeho stav sa zmení na &quot;Neprijatý&quot;, a nebude použiteľný. Toto sa môže občas stať, ak iný uzol generuje blok v priebehu niekoľkých sekúnd pred Vami.</translation>
     </message>
     <message>

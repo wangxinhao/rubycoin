@@ -1756,8 +1756,8 @@ Dit betekend dat een fee van %2 is vereist.</translation>
     </message>
     <message>
         <location filename="../sendcoinsdialog.cpp" line="-173"/>
-        <source>Enter a Rubycoin address (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Voeg een Rubycoin adres in (bijv. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>Enter a Rubycoin address (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Voeg een Rubycoin adres in (bijv. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+15"/>
@@ -1900,8 +1900,8 @@ Dit betekend dat een fee van %2 is vereist.</translation>
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to send the payment to  (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Het adres om naar te betalen (bijv. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>The address to send the payment to  (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Het adres om naar te betalen (bijv. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1930,8 +1930,8 @@ Dit betekend dat een fee van %2 is vereist.</translation>
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a Rubycoin address (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Voeg een Rubycoin adres in (bijv. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>Enter a Rubycoin address (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Voeg een Rubycoin adres in (bijv. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
 </context>
 <context>
@@ -1954,8 +1954,8 @@ Dit betekend dat een fee van %2 is vereist.</translation>
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to sign the message with (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Het adres om het bericht te ondertekenen (bijv. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i) </translation>
+        <source>The address to sign the message with (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Het adres om het bericht te ondertekenen (bijv. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F) </translation>
     </message>
     <message>
         <location line="+10"/>
@@ -2018,8 +2018,8 @@ Dit betekend dat een fee van %2 is vereist.</translation>
     </message>
     <message>
         <location line="+21"/>
-        <source>The address the message was signed with (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Het adres van het bericht is ondertekend met (bijv. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>The address the message was signed with (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Het adres van het bericht is ondertekend met (bijv. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+40"/>
@@ -2034,8 +2034,8 @@ Dit betekend dat een fee van %2 is vereist.</translation>
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a Rubycoin address (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Voeg een Rubycoin adres in (bijv. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>Enter a Rubycoin address (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Voeg een Rubycoin adres in (bijv. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -2249,7 +2249,7 @@ Dit betekend dat een fee van %2 is vereist.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Generated coins must mature 510 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
+        <source>Generated coins must mature 50 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Gegenereerd munten moeten 510 blokken maturen voordat ze kunnen worden besteed. Wanneer je een blok genereerd, het naar het netwerk is verzonden en toegevoegd aan de blokketen, zal de status veranderen naar &quot;niet geaccepteerd&quot;and kan het niet uitgegeven worden.  Dit kan soms gebeuren als een ander knooppunt genereert een blok binnen een paar seconden na jou.</translation>
     </message>
     <message>

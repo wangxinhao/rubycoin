@@ -35,34 +35,31 @@ Q_IMPORT_PLUGIN(qtaccessiblewidgets)
 static BitcoinGUI *guiref;
 static QSplashScreen *splashref;
 
-static bool ThreadSafeMessageBox(const std::string& message, const std::string& caption, int style)
+static void ThreadSafeMessageBox(const std::string& message, const std::string& caption, int style)
 {
     // Message from network thread
     if(guiref)
     {
         bool modal = (style & CClientUIInterface::MODAL);
-        bool ret = false;
         // in case of modal message, use blocking connection to wait for user to click OK
         QMetaObject::invokeMethod(guiref, "error",
                                    modal ? GUIUtil::blockingGUIThreadConnection() : Qt::QueuedConnection,
                                    Q_ARG(QString, QString::fromStdString(caption)),
                                    Q_ARG(QString, QString::fromStdString(message)),
-                                   Q_ARG(bool*, &ret));
-        return ret;
+                                   Q_ARG(bool, modal));
     }
     else
     {
         printf("%s: %s\n", caption.c_str(), message.c_str());
         fprintf(stderr, "%s: %s\n", caption.c_str(), message.c_str());
-        return false;
     }
 }
 
-static bool ThreadSafeAskFee(int64_t nFeeRequired)
+static bool ThreadSafeAskFee(int64_t nFeeRequired, const std::string& strCaption)
 {
     if(!guiref)
         return false;
-    if(nFeeRequired < CTransaction::nMinTxFee || nFeeRequired <= nTransactionFee || fDaemon)
+    if(nFeeRequired < MIN_TX_FEE || nFeeRequired <= nTransactionFee || fDaemon)
         return true;
     bool payFee = false;
 
@@ -73,6 +70,15 @@ static bool ThreadSafeAskFee(int64_t nFeeRequired)
     return payFee;
 }
 
+static void ThreadSafeHandleURI(const std::string& strURI)
+{
+    if(!guiref)
+        return;
+
+    QMetaObject::invokeMethod(guiref, "handleURI", GUIUtil::blockingGUIThreadConnection(),
+                               Q_ARG(QString, QString::fromStdString(strURI)));
+}
+
 static void InitMessage(const std::string &message)
 {
     if(splashref)
@@ -80,6 +86,11 @@ static void InitMessage(const std::string &message)
         splashref->showMessage(QString::fromStdString(message), Qt::AlignBottom|Qt::AlignHCenter, QColor(232,186,63));
         QApplication::instance()->processEvents();
     }
+}
+
+static void QueueShutdown()
+{
+    QMetaObject::invokeMethod(QCoreApplication::instance(), "quit", Qt::QueuedConnection);
 }
 
 /*
@@ -103,7 +114,7 @@ static void handleRunawayException(std::exception *e)
 int main(int argc, char *argv[])
 {
     // Do this early as we don't want to bother initializing if we are just calling IPC
-    //ipcScanRelay(argc, argv);
+    ipcScanRelay(argc, argv);
 
 #if QT_VERSION < 0x050000
     // Internal string conversion is all UTF-8
@@ -173,9 +184,9 @@ int main(int argc, char *argv[])
     // Subscribe to global signals from core
     uiInterface.ThreadSafeMessageBox.connect(ThreadSafeMessageBox);
     uiInterface.ThreadSafeAskFee.connect(ThreadSafeAskFee);
-    //uiInterface.ThreadSafeHandleURI.connect(ThreadSafeHandleURI);
+    uiInterface.ThreadSafeHandleURI.connect(ThreadSafeHandleURI);
     uiInterface.InitMessage.connect(InitMessage);
-    //uiInterface.QueueShutdown.connect(QueueShutdown);
+    uiInterface.QueueShutdown.connect(QueueShutdown);
     uiInterface.Translate.connect(Translate);
 
     // Show help message immediately after parsing command-line options (for "-lang") and setting locale,
@@ -207,10 +218,9 @@ int main(int argc, char *argv[])
         if (GUIUtil::GetStartOnSystemStartup())
             GUIUtil::SetStartOnSystemStartup(true);
 
-        boost::thread_group threadGroup;
         BitcoinGUI window;
         guiref = &window;
-        if(AppInit2(threadGroup))
+        if(AppInit2())
         {
             {
                 // Put this in a block, so that the Model objects are cleaned up before
@@ -236,7 +246,7 @@ int main(int argc, char *argv[])
                 }
 
                 // Place this here as guiref has to be defined if we don't want to lose URIs
-                //ipcInit(argc, argv);
+                ipcInit(argc, argv);
 
                 app.exec();
 
@@ -246,7 +256,7 @@ int main(int argc, char *argv[])
                 guiref = 0;
             }
             // Shutdown the core and its threads, but don't exit Bitcoin-Qt here
-            Shutdown();
+            Shutdown(NULL);
         }
         else
         {

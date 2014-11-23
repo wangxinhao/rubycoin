@@ -9,11 +9,10 @@
 #include "ui_interface.h"
 #include "base58.h"
 
-#include <string>
-
 QString TransactionDesc::FormatTxStatus(const CWalletTx& wtx)
 {
-    if (!wtx.IsFinal())
+    AssertLockHeld(cs_main);
+    if (!IsFinalTx(wtx, nBestHeight + 1))
     {
         if (wtx.nLockTime < LOCKTIME_THRESHOLD)
             return tr("Open for %n more block(s)", "", wtx.nLockTime - nBestHeight);
@@ -27,7 +26,7 @@ QString TransactionDesc::FormatTxStatus(const CWalletTx& wtx)
             return tr("conflicted");
         else if (GetAdjustedTime() - wtx.nTimeReceived > 2 * 60 && wtx.GetRequestCount() == 0)
             return tr("%1/offline").arg(nDepth);
-        else if (nDepth < 6)
+        else if (nDepth < 10)
             return tr("%1/unconfirmed").arg(nDepth);
         else
             return tr("%1 confirmations").arg(nDepth);
@@ -38,7 +37,7 @@ QString TransactionDesc::toHTML(CWallet *wallet, CWalletTx &wtx)
 {
     QString strHTML;
 
-    LOCK(wallet->cs_wallet);
+    LOCK2(cs_main, wallet->cs_wallet);
     strHTML.reserve(4000);
     strHTML += "<html><font face='verdana, arial, helvetica, sans-serif'>";
 
@@ -63,7 +62,7 @@ QString TransactionDesc::toHTML(CWallet *wallet, CWalletTx &wtx)
     //
     // From
     //
-    if (wtx.IsCoinBase())
+    if (wtx.IsCoinBase() || wtx.IsCoinStake())
     {
         strHTML += "<b>" + tr("Source") + ":</b> " + tr("Generated") + "<br>";
     }
@@ -218,8 +217,8 @@ QString TransactionDesc::toHTML(CWallet *wallet, CWalletTx &wtx)
 
     strHTML += "<b>" + tr("Transaction ID") + ":</b> " + wtx.GetHash().ToString().c_str() + "<br>";
 
-    if (wtx.IsCoinBase())
-        strHTML += "<br>" + tr("Generated coins must mature 120 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to \"not accepted\" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.") + "<br>";
+    if (wtx.IsCoinBase() || wtx.IsCoinStake())
+        strHTML += "<br>" + tr("Generated coins must mature 50 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to \"not accepted\" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.") + "<br>";
 
     //
     // Debug view
@@ -237,16 +236,17 @@ QString TransactionDesc::toHTML(CWallet *wallet, CWalletTx &wtx)
         strHTML += "<br><b>" + tr("Transaction") + ":</b><br>";
         strHTML += GUIUtil::HtmlEscape(wtx.ToString(), true);
 
+        CTxDB txdb("r"); // To fetch source txouts
+
         strHTML += "<br><b>" + tr("Inputs") + ":</b>";
         strHTML += "<ul>";
 
-        LOCK(wallet->cs_wallet);
         BOOST_FOREACH(const CTxIn& txin, wtx.vin)
         {
             COutPoint prevout = txin.prevout;
 
-            CCoins prev;
-            if(pcoinsTip->GetCoins(prevout.hash, prev))
+            CTransaction prev;
+            if(txdb.ReadDiskTx(prevout.hash, prev))
             {
                 if (prevout.n < prev.vout.size())
                 {

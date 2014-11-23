@@ -46,6 +46,7 @@ void OptionsModel::Init()
     fMinimizeOnClose = settings.value("fMinimizeOnClose", false).toBool();
     fCoinControlFeatures = settings.value("fCoinControlFeatures", false).toBool();
     nTransactionFee = settings.value("nTransactionFee").toLongLong();
+    nReserveBalance = settings.value("nReserveBalance").toLongLong();
     language = settings.value("language", "").toString();
     fUseBlackTheme = settings.value("fUseBlackTheme", true).toBool();
 
@@ -57,6 +58,8 @@ void OptionsModel::Init()
         SoftSetArg("-proxy", settings.value("addrProxy").toString().toStdString());
     if (settings.contains("nSocksVersion") && settings.value("fUseProxy").toBool())
         SoftSetArg("-socks", settings.value("nSocksVersion").toString().toStdString());
+    if (settings.contains("fMinimizeCoinAge"))
+        SoftSetBoolArg("-minimizecoinage", settings.value("fMinimizeCoinAge").toBool());
     if (!language.isEmpty())
         SoftSetArg("-lang", language.toStdString());
 }
@@ -101,12 +104,16 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return settings.value("nSocksVersion", 5);
         case Fee:
             return QVariant((qint64) nTransactionFee);
+        case ReserveBalance:
+            return QVariant((qint64) nReserveBalance);
         case DisplayUnit:
             return QVariant(nDisplayUnit);
         case Language:
             return settings.value("language", "");
         case CoinControlFeatures:
             return QVariant(fCoinControlFeatures);
+        case MinimizeCoinAge:
+            return settings.value("fMinimizeCoinAge", GetBoolArg("-minimizecoinage", false));
         case UseBlackTheme:
             return QVariant(fUseBlackTheme);
         default:
@@ -132,8 +139,9 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
             settings.setValue("fMinimizeToTray", fMinimizeToTray);
             break;
         case MapPortUPnP:
-            settings.setValue("fUseUPnP", value.toBool());
-            MapPort(value.toBool());
+            fUseUPnP = value.toBool();
+            settings.setValue("fUseUPnP", fUseUPnP);
+            MapPort();
             break;
         case MinimizeOnClose:
             fMinimizeOnClose = value.toBool();
@@ -179,6 +187,11 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
             settings.setValue("nTransactionFee", (qint64) nTransactionFee);
             emit transactionFeeChanged(nTransactionFee);
             break;
+        case ReserveBalance:
+            nReserveBalance = value.toLongLong();
+            settings.setValue("nReserveBalance", (qint64) nReserveBalance);
+            emit reserveBalanceChanged(nReserveBalance);
+            break;
         case DisplayUnit:
             nDisplayUnit = value.toInt();
             settings.setValue("nDisplayUnit", nDisplayUnit);
@@ -193,6 +206,10 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
             emit coinControlFeaturesChanged(fCoinControlFeatures);
             }
             break;
+        case MinimizeCoinAge:
+           fMinimizeCoinAge = value.toBool();
+           settings.setValue("fMinimizeCoinAge", fMinimizeCoinAge);
+           break;
         case UseBlackTheme:
             fUseBlackTheme = value.toBool();
             settings.setValue("fUseBlackTheme", fUseBlackTheme);
@@ -209,6 +226,11 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
 qint64 OptionsModel::getTransactionFee()
 {
     return nTransactionFee;
+}
+
+qint64 OptionsModel::getReserveBalance()
+{
+    return nReserveBalance;
 }
 
 bool OptionsModel::getCoinControlFeatures()

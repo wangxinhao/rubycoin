@@ -107,6 +107,8 @@ static void ipcThread2(void* pArg)
             MilliSleep(1000);
         }
 
+        if (fShutdown)
+            break;
     }
 
     // Remove message queue

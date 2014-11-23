@@ -28,10 +28,10 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
     int64_t nCredit = wtx.GetCredit(true);
     int64_t nDebit = wtx.GetDebit();
     int64_t nNet = nCredit - nDebit;
-    uint256 hash = wtx.GetHash();
+    uint256 hash = wtx.GetHash(), hashPrev = 0;
     std::map<std::string, std::string> mapValue = wtx.mapValue;
 
-    if (nNet > 0 || wtx.IsCoinBase())
+    if (nNet > 0 || wtx.IsCoinBase() || wtx.IsCoinStake())
     {
         //
         // Credit
@@ -60,6 +60,17 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                 {
                     // Generated (proof-of-work)
                     sub.type = TransactionRecord::Generated;
+                }
+                if (wtx.IsCoinStake())
+                {
+                    // Generated (proof-of-stake)
+
+                    if (hashPrev == hash)
+                        continue; // last coinstake output
+
+                    sub.type = TransactionRecord::Generated;
+                    sub.credit = nNet > 0 ? nNet : wtx.GetValueOut() - nDebit;
+                    hashPrev = hash;
                 }
 
                 parts.append(sub);
@@ -144,7 +155,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
 
 void TransactionRecord::updateStatus(const CWalletTx &wtx)
 {
-
+    AssertLockHeld(cs_main);
     // Determine transaction status
 
     // Find the block the tx is in
@@ -159,11 +170,11 @@ void TransactionRecord::updateStatus(const CWalletTx &wtx)
         (wtx.IsCoinBase() ? 1 : 0),
         wtx.nTimeReceived,
         idx);
-    status.countsForBalance = wtx.IsConfirmed();
+    status.countsForBalance = wtx.IsTrusted() && !(wtx.GetBlocksToMaturity() > 0);
     status.depth = wtx.GetDepthInMainChain();
     status.cur_num_blocks = nBestHeight;
 
-    if (!wtx.IsFinal())
+    if (!IsFinalTx(wtx, nBestHeight + 1))
     {
         if (wtx.nLockTime < LOCKTIME_THRESHOLD)
         {
@@ -229,6 +240,7 @@ void TransactionRecord::updateStatus(const CWalletTx &wtx)
 
 bool TransactionRecord::statusUpdateNeeded()
 {
+    AssertLockHeld(cs_main);
     return status.cur_num_blocks != nBestHeight;
 }
 

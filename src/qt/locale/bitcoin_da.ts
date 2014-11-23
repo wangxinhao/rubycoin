@@ -1756,8 +1756,8 @@ Det betyder, at et gebyr på mindst %2 er påkrævet.</translation>
     </message>
     <message>
         <location filename="../sendcoinsdialog.cpp" line="-173"/>
-        <source>Enter a Rubycoin address (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Indtast en Rubycoin-adresse (f.eks R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>Enter a Rubycoin address (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Indtast en Rubycoin-adresse (f.eks Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+15"/>
@@ -1900,8 +1900,8 @@ Det betyder, at et gebyr på mindst %2 er påkrævet.</translation>
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to send the payment to  (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Adressen til at sende betalingen til (f.eks R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>The address to send the payment to  (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Adressen til at sende betalingen til (f.eks Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1930,8 +1930,8 @@ Det betyder, at et gebyr på mindst %2 er påkrævet.</translation>
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a Rubycoin address (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Indtast en Rubycoin-adresse (f.eks R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>Enter a Rubycoin address (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Indtast en Rubycoin-adresse (f.eks Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
 </context>
 <context>
@@ -1954,8 +1954,8 @@ Det betyder, at et gebyr på mindst %2 er påkrævet.</translation>
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to sign the message with (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Adresse til at underskrive meddelelsen med (f.eks R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>The address to sign the message with (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Adresse til at underskrive meddelelsen med (f.eks Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -2018,8 +2018,8 @@ Det betyder, at et gebyr på mindst %2 er påkrævet.</translation>
     </message>
     <message>
         <location line="+21"/>
-        <source>The address the message was signed with (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Adressen meddelelse blev underskrevet med (f.eks R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>The address the message was signed with (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Adressen meddelelse blev underskrevet med (f.eks Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="+40"/>
@@ -2034,8 +2034,8 @@ Det betyder, at et gebyr på mindst %2 er påkrævet.</translation>
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a Rubycoin address (e.g. R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
-        <translation>Indtast en Rubycoin-adresse (f.eks R8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+        <source>Enter a Rubycoin address (e.g. Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</source>
+        <translation>Indtast en Rubycoin-adresse (f.eks Gf3MqcdvirAVxWcRs2LWK5UMeW9tK3UT8F)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -2249,7 +2249,7 @@ Det betyder, at et gebyr på mindst %2 er påkrævet.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Generated coins must mature 510 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
+        <source>Generated coins must mature 50 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Generet mønter skal modne 510 blokke, før de kan blive brugt. Når du genererede denne blok blev det transmitteret til netværket, der tilføjes til blokkæden. Hvis det mislykkes at komme ind i kæden, vil dens tilstand ændres til &quot;ikke godkendt&quot;, og det vil ikke være brugbar. Dette kan lejlighedsvis ske, hvis en anden node genererer en blok et par sekunder efter din.</translation>
     </message>
     <message>

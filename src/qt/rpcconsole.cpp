@@ -1,7 +1,3 @@
-// Copyright (c) 2011-2013 The Bitcoin developers
-// Distributed under the MIT/X11 software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
-
 #include "rpcconsole.h"
 #include "ui_rpcconsole.h"
 
@@ -10,21 +6,24 @@
 #include "guiutil.h"
 
 #include <QTime>
+#include <QTimer>
 #include <QThread>
+#include <QTextEdit>
 #include <QKeyEvent>
-#if QT_VERSION < 0x050000
 #include <QUrl>
-#endif
 #include <QScrollBar>
 
 #include <openssl/crypto.h>
 
-// TODO: add a scrollback limit, as there is currently none
 // TODO: make it possible to filter out categories (esp debug messages when implemented)
 // TODO: receive errors and debug messages through ClientModel
 
+const int CONSOLE_SCROLLBACK = 50;
 const int CONSOLE_HISTORY = 50;
+
 const QSize ICON_SIZE(24, 24);
+
+const int INITIAL_TRAFFIC_GRAPH_MINS = 30;
 
 const struct {
     const char *url;
@@ -39,18 +38,22 @@ const struct {
 
 /* Object for executing console RPC commands in a separate thread.
 */
-class RPCExecutor : public QObject
+class RPCExecutor: public QObject
 {
     Q_OBJECT
-
 public slots:
+    void start();
     void request(const QString &command);
-
 signals:
     void reply(int category, const QString &command);
 };
 
 #include "rpcconsole.moc"
+
+void RPCExecutor::start()
+{
+   // Nothing to do
+}
 
 /**
  * Split shell command line into a list of arguments. Aims to emulate \c bash and friends.
@@ -187,7 +190,6 @@ void RPCExecutor::request(const QString &command)
 RPCConsole::RPCConsole(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::RPCConsole),
-    clientModel(0),
     historyPtr(0)
 {
     ui->setupUi(this);
@@ -207,6 +209,7 @@ RPCConsole::RPCConsole(QWidget *parent) :
     ui->openSSLVersion->setText(SSLeay_version(SSLEAY_VERSION));
 
     startExecutor();
+    setTrafficGraphRange(INITIAL_TRAFFIC_GRAPH_MINS);
 
     clear();
 }
@@ -255,12 +258,16 @@ bool RPCConsole::eventFilter(QObject* obj, QEvent *event)
 
 void RPCConsole::setClientModel(ClientModel *model)
 {
-    this->clientModel = model;
+    clientModel = model;
+    ui->trafficGraph->setClientModel(model);
     if(model)
     {
         // Subscribe to information, replies, messages, errors
         connect(model, SIGNAL(numConnectionsChanged(int)), this, SLOT(setNumConnections(int)));
         connect(model, SIGNAL(numBlocksChanged(int,int)), this, SLOT(setNumBlocks(int,int)));
+
+        updateTrafficStats(model->getTotalBytesRecv(), model->getTotalBytesSent());
+        connect(model, SIGNAL(bytesChanged(quint64,quint64)), this, SLOT(updateTrafficStats(quint64, quint64)));
 
         // Provide initial values
         ui->clientVersion->setText(model->formatFullVersion());
@@ -270,6 +277,8 @@ void RPCConsole::setClientModel(ClientModel *model)
 
         setNumConnections(model->getNumConnections());
         ui->isTestNet->setChecked(model->isTestNet());
+
+        setNumBlocks(model->getNumBlocks(), model->getNumBlocksOfPeers());
     }
 }
 
@@ -287,8 +296,6 @@ static QString categoryClass(int category)
 void RPCConsole::clear()
 {
     ui->messagesWidget->clear();
-    history.clear();
-    historyPtr = 0;
     ui->lineEdit->clear();
     ui->lineEdit->setFocus();
 
@@ -307,9 +314,9 @@ void RPCConsole::clear()
                 "table { }"
                 "td.time { color: #808080; padding-top: 3px; } "
                 "td.message { font-family: Monospace; font-size: 12px; } "
-                "td.cmd-request { color: #006060; } "
+                "td.cmd-request { color: #00C0C0; } "
                 "td.cmd-error { color: red; } "
-                "b { color: #006060; } "
+                "b { color: #00C0C0; } "
                 );
 
     message(CMD_REPLY, (tr("Welcome to the Rubycoin RPC console.") + "<br>" +
@@ -341,10 +348,13 @@ void RPCConsole::setNumConnections(int count)
 void RPCConsole::setNumBlocks(int count, int countOfPeers)
 {
     ui->numberOfBlocks->setText(QString::number(count));
-    // If there is no current countOfPeers available display N/A instead of 0, which can't ever be true
-    ui->totalBlocks->setText(countOfPeers == 0 ? tr("N/A") : QString::number(countOfPeers));
+    ui->totalBlocks->setText(QString::number(countOfPeers));
     if(clientModel)
+    {
+        // If there is no current number available display N/A instead of 0, which can't ever be true
+        ui->totalBlocks->setText(clientModel->getNumBlocksOfPeers() == 0 ? tr("N/A") : QString::number(clientModel->getNumBlocksOfPeers()));
         ui->lastBlockTime->setText(clientModel->getLastBlockDate().toString());
+    }
 }
 
 void RPCConsole::on_lineEdit_returnPressed()
@@ -356,8 +366,8 @@ void RPCConsole::on_lineEdit_returnPressed()
     {
         message(CMD_REQUEST, cmd);
         emit cmdRequest(cmd);
-        // Truncate history from current position
-        history.erase(history.begin() + historyPtr, history.end());
+        // Remove command, if already in history
+        history.removeOne(cmd);
         // Append command to history
         history.append(cmd);
         // Enforce maximum history size
@@ -385,15 +395,16 @@ void RPCConsole::browseHistory(int offset)
 
 void RPCConsole::startExecutor()
 {
-    QThread *thread = new QThread;
+    QThread* thread = new QThread;
     RPCExecutor *executor = new RPCExecutor();
     executor->moveToThread(thread);
 
+    // Notify executor when thread started (in executor thread)
+    connect(thread, SIGNAL(started()), executor, SLOT(start()));
     // Replies from executor object must go to this object
     connect(executor, SIGNAL(reply(int,QString)), this, SLOT(message(int,QString)));
     // Requests from this object must go to executor
     connect(this, SIGNAL(cmdRequest(QString)), executor, SLOT(request(QString)));
-
     // On stopExecutor signal
     // - queue executor for deletion (in execution thread)
     // - quit the Qt event loop in the execution thread
@@ -430,4 +441,50 @@ void RPCConsole::on_showCLOptionsButton_clicked()
 {
     GUIUtil::HelpMessageBox help;
     help.exec();
+}
+
+void RPCConsole::on_sldGraphRange_valueChanged(int value)
+{
+    const int multiplier = 5; // each position on the slider represents 5 min
+    int mins = value * multiplier;
+    setTrafficGraphRange(mins);
+}
+
+QString RPCConsole::FormatBytes(quint64 bytes)
+{
+    if(bytes < 1024)
+        return QString(tr("%1 B")).arg(bytes);
+    if(bytes < 1024 * 1024)
+        return QString(tr("%1 KB")).arg(bytes / 1024);
+    if(bytes < 1024 * 1024 * 1024)
+        return QString(tr("%1 MB")).arg(bytes / 1024 / 1024);
+
+    return QString(tr("%1 GB")).arg(bytes / 1024 / 1024 / 1024);
+}
+
+void RPCConsole::setTrafficGraphRange(int mins)
+{
+    ui->trafficGraph->setGraphRangeMins(mins);
+    if(mins < 60) {
+        ui->lblGraphRange->setText(QString(tr("%1 m")).arg(mins));
+    } else {
+        int hours = mins / 60;
+        int minsLeft = mins % 60;
+        if(minsLeft == 0) {
+            ui->lblGraphRange->setText(QString(tr("%1 h")).arg(hours));
+        } else {
+            ui->lblGraphRange->setText(QString(tr("%1 h %2 m")).arg(hours).arg(minsLeft));
+        }
+    }
+}
+
+void RPCConsole::updateTrafficStats(quint64 totalBytesIn, quint64 totalBytesOut)
+{
+    ui->lblBytesIn->setText(FormatBytes(totalBytesIn));
+    ui->lblBytesOut->setText(FormatBytes(totalBytesOut));
+}
+
+void RPCConsole::on_btnClearTrafficGraph_clicked()
+{
+    ui->trafficGraph->clear();
 }
