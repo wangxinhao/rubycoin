@@ -1,0 +1,23 @@
+src/*.exe
+src/rubycoin
+src/rubycoind
+src/test_rubycoin
+src/build.h
+.*.swp
+*.*~*
+*.bak
+*.rej
+*.orig
+*.o
+*.patch
+.rubycoin
+*.qm
+Makefile
+rubycoin-qt
+qrc_*.cpp
+#qt creator
+*.pro.user
+.DS_Store
+build
+
+!src/leveldb/Makefile
