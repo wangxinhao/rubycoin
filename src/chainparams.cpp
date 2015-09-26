@@ -86,7 +86,7 @@ public:
         assert(hashGenesisBlock == uint256("0x00000760e24f1ad47f7a6e912bc9ed2b9ce013fc85ba217da8b079762f6b0058"));
         assert(genesis.hashMerkleRoot == uint256("0x1649872ed1e4173e32b8b58f16eef2031dbdd46980878b300e032a02df8c1130"));
 
-        vSeeds.clear();
+        vSeeds.push_back(CDNSSeedData("vps.rubycoin.org", "seeder.rubycoin.org"));
 
         base58Prefixes[PUBKEY_ADDRESS] = list_of(60);
         base58Prefixes[SCRIPT_ADDRESS] = list_of(85);
