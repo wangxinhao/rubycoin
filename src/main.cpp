@@ -1015,6 +1015,10 @@ unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfS
     int64_t nActualSpacing = pindexPrev->GetBlockTime() - pindexPrevPrev->GetBlockTime();
     if (nActualSpacing < 0)
         nActualSpacing = nTargetSpacing;
+    if (IsProtocolV3(pindexLast->nTime)) {
+        if (nActualSpacing > nTargetSpacing * 10)
+            nActualSpacing = nTargetSpacing * 10;
+    }
 
     // target change every block
     // retarget with exponential moving toward target spacing
