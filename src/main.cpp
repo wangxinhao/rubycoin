@@ -3239,8 +3239,8 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         if (tx.nDoS) pfrom->Misbehaving(tx.nDoS);
     }
 
-
-    else if (strCommand == "block")
+    // Ignore blocks received while importing
+    else if (strCommand == "block" && !fImporting && !fReindex)
     {
         CBlock block;
         vRecv >> block;
