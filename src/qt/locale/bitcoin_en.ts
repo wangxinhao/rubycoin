@@ -10,7 +10,7 @@
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;b&gt;Rubycoin&lt;/b&gt; version</source>
+        <source>&lt;b&gt;Rubycoin&lt;/b&gt;</source>
         <translation type="unfinished"/>
     </message>
     <message>

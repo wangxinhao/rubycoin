@@ -8,7 +8,7 @@
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;b&gt;Rubycoin&lt;/b&gt; version</source>
+        <source>&lt;b&gt;Rubycoin&lt;/b&gt;</source>
         <translation>&lt;b&gt;Rubycoin&lt;/b&gt;-asiakasohjelman versio</translation>
     </message>
     <message>

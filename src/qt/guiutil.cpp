@@ -129,6 +129,10 @@ bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
 
 bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
 {
+    // Convert rubycoin:// to rubycoin:
+    //
+    //    Cannot handle this later, because bitcoin:// will cause Qt to see the part after // as host,
+    //    which will lower-case it (and thus invalidate the address).
     if(uri.startsWith("rubycoin://"))
     {
         uri.replace(0, 11, "rubycoin:");
@@ -460,7 +464,7 @@ void SetRedThemeQSS(QApplication& app)
 {
     app.setStyleSheet("QWidget        { background: rgb(72,0,0); color: rgb(255,255,255); }"
                       "QFrame         { border: none; }"
-                      "QComboBox      { color: rgb(255,255,255); }"
+                      "QComboBox      { background: rgb(255,255,255); color: rgb(0, 0, 0); }"
                       "QComboBox QAbstractItemView::item { color: rgb(255,255,255); }"
                       "QPushButton    { background: rgb(86,183,245); color: rgb(21,21,21); }"
                       "QDoubleSpinBox { background: rgb(255,255,255); color: rgb(0,0,0); border-color: rgb(194,194,194); }"
@@ -469,8 +473,10 @@ void SetRedThemeQSS(QApplication& app)
                       "QPlainTextEdit { background: rgb(37,0,0); color: rgb(255,255,255); }"
                       "QMenuBar       { background: rgb(72,0,0); color: rgb(110,116,126); }"
                       "QMenu          { background: rgb(37,0,0); color: rgb(222,222,222); }"
-                      "QMenu::item:selected { background-color: rgb(72,0,0); }"
-                      "QLabel { color: rgb(255,255,255); }"
+                      "QMenu::item:selected { background: rgb(255,255,255); }"
+                      "QLabel { color: rgb(255,255,255); font-size: 14px; }"
+		              "QLabel#label_5 { margin-bottom: 15px; font-size: 18px; }"
+                      "QLabel#label_4 { margin-bottom: 15px; font-size: 18px; }"
                       "QScrollBar     { color: rgb(255,255,255); }"
                       "QCheckBox      { color: rgb(120,127,139); }"
                       "QRadioButton   { color: rgb(120,127,139); }"
@@ -478,13 +484,13 @@ void SetRedThemeQSS(QApplication& app)
                       "QTabBar::tab:selected  { background: rgb(72,0,0); }"
                       "QTabBar::tab:!selected { background: rgb(37,0,0); margin-top: 2px; }"
                       "QTabWidget::pane { border: 1px solid rgb(126,0,0); }"
-                      "QToolButton    { background: rgb(37,0,0); color: rgb(116,122,134); border: none; border-left-color: rgb(72,0,0); border-left-style: solid; border-left-width: 4px; margin-top: 8px; margin-bottom: 8px; }"
+                      "QToolButton    { background: rgb(37,0,0); color: rgb(150,150,150); border: none; border-left-color: rgb(72,0,0); border-left-style: solid; border-left-width: 4px; margin-top: 8px; margin-bottom: 8px; font-size: 14px; }"
                       "QToolButton:checked { color: rgb(255,255,255); border: none; border-left-color: rgb(20,133,204); border-left-style: solid; border-left-width: 4px; }"
                       "QProgressBar   { color: rgb(149,148,148); border-color: rgb(255,255,255); border-width: 3px; border-style: solid; }"
                       "QProgressBar::chunk { background: rgb(255,255,255); }"
                       "QTreeView::item { background: rgb(72,0,0); color: rgb(212,213,213); }"
                       "QTreeView::item:selected { background-color: rgb(72,0,0); }"
-                      "QTableView     { background: rgb(126,0,0); color: rgb(212,213,213); gridline-color: rgb(126,0,0); }"
+                      "QTableView     { background: rgb(126,0,0); color: rgb(212,213,213); gridline-color: rgb(126,0,0); font-size: 14px; }"
                       "QHeaderView::section { background: rgb(37,0,0); color: rgb(255,255,255); }"
                       "QToolBar       { background: rgb(37,0,0); border: none; }");
 }

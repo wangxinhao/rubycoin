@@ -8,7 +8,7 @@
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;b&gt;Rubycoin&lt;/b&gt; version</source>
+        <source>&lt;b&gt;Rubycoin&lt;/b&gt;</source>
         <translation>Versión &lt;b&gt;Rubycoin&lt;/b&gt; .</translation>
     </message>
     <message>
@@ -2845,11 +2845,7 @@ for example: alertnotify=echo %%s | mail -s &quot;Rubycoin Alert&quot; admin@foo
         <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
         <translation>Fallou escoitar en calquera porto. Emprega -listen=0 se queres esto.</translation>
     </message>
-    <message>
-        <location line="-92"/>
-        <source>Sync checkpoints policy (default: strict)</source>
-        <translation type="unfinished"/>
-    </message>
+    
     <message>
         <location line="+90"/>
         <source>Invalid -tor address: &apos;%s&apos;</source>
