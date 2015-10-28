@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = rubycoin-qt
-VERSION = 2.1.0.0
+VERSION = 2.2.0.0
 INCLUDEPATH += src src/json src/qt
 QT += network
 DEFINES += ENABLE_WALLET
@@ -29,8 +29,7 @@ UI_DIR = build
 
 # use: qmake "RELEASE=1"
 contains(RELEASE, 1) {
-    # Mac: compile for maximum compatibility (10.5, 32-bit)
-    macx:QMAKE_CXXFLAGS += -mmacosx-version-min=10.5 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.5.sdk
+    macx:QMAKE_CXXFLAGS += -mmacosx-version-min=10.8 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.8.sdk
 
     !windows:!macx {
         # Linux: static link
@@ -350,12 +349,6 @@ QMAKE_EXTRA_COMPILERS += TSQM
 # "Other files" to show in Qt Creator
 OTHER_FILES += \
     doc/*.rst doc/*.txt doc/README README.md res/bitcoin-qt.rc
-
-# platform specific defaults, if not overridden on command line
-isEmpty(BOOST_LIB_SUFFIX) {
-    macx:BOOST_LIB_SUFFIX = -mt
-    windows:BOOST_LIB_SUFFIX = -mt
-}
 
 isEmpty(BOOST_THREAD_LIB_SUFFIX) {
     win32:BOOST_THREAD_LIB_SUFFIX = _win32$$BOOST_LIB_SUFFIX
