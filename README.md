@@ -11,6 +11,4 @@ http://twitter.com/rubycoinorg
 
 http://github.com/rubycoinorg
 
-http://www.reddit.com/r/rubycoin
-
 https://kiwiirc.com/client/irc.freenode.org/#rubycoin.org
