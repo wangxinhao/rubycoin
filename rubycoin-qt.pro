@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = rubycoin-qt
-VERSION = 2.2.0.0
+VERSION = 2.2.0.1
 INCLUDEPATH += src src/json src/qt
 QT += network
 DEFINES += ENABLE_WALLET
