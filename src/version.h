@@ -31,7 +31,7 @@ static const int DATABASE_VERSION = 70001;
 // network protocol versioning
 //
 
-static const int PROTOCOL_VERSION = 70001;
+static const int PROTOCOL_VERSION = 70002;
 
 // intial proto version, to be increased after version/verack negotiation
 static const int INIT_PROTO_VERSION = 209;
@@ -55,5 +55,6 @@ static const int MEMPOOL_GD_VERSION = 60002;
 
 // reject blocks with non-canonical signatures starting from this version
 static const int CANONICAL_BLOCK_SIG_VERSION = 70001;
+static const int CANONICAL_BLOCK_SIG_LOW_S_VERSION = 70002;
 
 #endif
